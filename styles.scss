@@ -1,77 +1,28 @@
-// tnoDknilBofoM - Sultan47 Theme
-$glyph-blue: #1a237e
-$hexocta-gold: #ffd700
-$mirror-black: #000
-
-* {
-  margin: 0; padding: 0; box-sizing: border-box;
-}
-
-body {
-  background: linear-gradient(135deg, $mirror-black, $glyph-blue);
-  overflow: hidden;
-  font-family: 'Courier New', monospace;
-}
-
-#game {
-  width: 100vw; height: 100vh;
-  cursor: grab;
-  
-  &:active { cursor: grabbing; }
-}
-
-.glyph-ui {
-  position: fixed; top: 20px; right: 20px; z-index: 100;
-  color: $hexocta-gold; font-size: 12px;
-  text-shadow: 0 0 10px $glyph-blue;
-  
-  .strand { 
-    background: rgba(0,0,0,0.8); 
-    padding: 8px; border-radius: 4px;
-  }
-}
-
-// Mobile touch controls
-.touch-dpad {
-  position: fixed; bottom: 20px; left: 20px;
-  display: grid; grid-template: repeat(3, 50px) / repeat(3, 50px);
-  gap: 5px;
-  
-  button { 
-    background: rgba($glyph-blue, 0.8); 
-    border: none; border-radius: 8px;
-    color: white; font-weight: bold;
-  }
-}
-// Cyberpunk 16-bit glow
 $neon-green: #00ff41;
 $matrix-black: #0a0a0a;
-$scanline: rgba(0,255,65,0.03);
 
 body {
-  background: radial-gradient(circle, $matrix-black 0%, #000 100%);
-  
-  canvas {
-    filter: drop-shadow(0 0 10px $neon-green);
-    image-rendering: pixelated;
-  }
-  
-  #ui {
-    position: absolute;
-    top: 10px; left: 10px;
-    font-size: 12px;
-    text-shadow: 0 0 5px $neon-green;
-    
-    div { margin: 5px 0; }
-  }
+  margin: 0; background: $matrix-black; 
+  color: $neon-green; font-family: 'Courier New', monospace;
+  overflow: hidden;
 }
 
-// Scanlines
+canvas { 
+  filter: drop-shadow(0 0 10px $neon-green);
+  image-rendering: pixelated; display: block;
+}
+
+#ui {
+  position: absolute; top: 10px; left: 10px;
+  font-size: 12px; text-shadow: 0 0 5px $neon-green;
+}
+
+// Scanline effect
 body::before {
-  content: '';
-  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  content: ''; position: fixed; inset: 0;
   background: repeating-linear-gradient(
-    0deg, transparent, transparent 2px, $scanline 2px, $scanline 4px
+    0deg, transparent 0, transparent 2px, 
+    rgba(0,255,65,0.03) 2px, rgba(0,255,65,0.03) 4px
   );
   pointer-events: none;
 }
