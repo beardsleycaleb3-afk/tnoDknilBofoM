@@ -1,0 +1,13 @@
+{
+  "name": "pge-snes-rpg",
+  "version": "1.0.0",
+  "scripts": {
+    "dev": "serve snes-rpg -p 3000",
+    "build": "sass snes-rpg/styles.scss snes-rpg/styles.css",
+    "save": "node scripts/save-state.js"
+  },
+  "devDependencies": {
+    "serve": "^14.2.1",
+    "sass": "^1.70.0"
+  }
+}
