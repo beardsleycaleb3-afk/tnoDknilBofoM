@@ -1,0 +1,45 @@
+// tnoDknilBofoM - Sultan47 Theme
+$glyph-blue: #1a237e
+$hexocta-gold: #ffd700
+$mirror-black: #000
+
+* {
+  margin: 0; padding: 0; box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(135deg, $mirror-black, $glyph-blue);
+  overflow: hidden;
+  font-family: 'Courier New', monospace;
+}
+
+#game {
+  width: 100vw; height: 100vh;
+  cursor: grab;
+  
+  &:active { cursor: grabbing; }
+}
+
+.glyph-ui {
+  position: fixed; top: 20px; right: 20px; z-index: 100;
+  color: $hexocta-gold; font-size: 12px;
+  text-shadow: 0 0 10px $glyph-blue;
+  
+  .strand { 
+    background: rgba(0,0,0,0.8); 
+    padding: 8px; border-radius: 4px;
+  }
+}
+
+// Mobile touch controls
+.touch-dpad {
+  position: fixed; bottom: 20px; left: 20px;
+  display: grid; grid-template: repeat(3, 50px) / repeat(3, 50px);
+  gap: 5px;
+  
+  button { 
+    background: rgba($glyph-blue, 0.8); 
+    border: none; border-radius: 8px;
+    color: white; font-weight: bold;
+  }
+}
