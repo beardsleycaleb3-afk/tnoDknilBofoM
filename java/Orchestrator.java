@@ -1,10 +1,16 @@
 public class Orchestrator {
-    public static String assembleGlyph(String glyph) {
-        // Dispatch 4-way split
-        String rustVerts = RustBridge.decode(glyph);   // 25%
-        String csGeometry = CSharp.assemble(rustVerts); // 25%
-        String rubyJson = Ruby.translate(csGeometry);   // 25%
-        String goFinal = GoBridge.finalize(rubyJson);   // 25%
-        return goFinal; // Three.js ready
+    public static String processGlyph(String glyph) {
+        // Sultan47: 100% distributed glyph physics
+        String rust = RustJNI.decode(glyph);           // 25% zero-copy
+        String ruby = RubyDSL.translate(rust);         // 25% JSON packets  
+        String cs = CSharpGeometry.assemble(ruby);     // 25% BufferGeometry
+        String asm = AsmBridge.execute(cs);            // 25% 6502 physics
+        
+        return asm;  // Three.js ready: "0oo0O00O" → hexocta mesh
+    }
+    
+    public static void main(String[] args) {
+        String result = processGlyph("0oo0O00O");
+        System.out.println(result);  // → Three.js vertices
     }
 }
