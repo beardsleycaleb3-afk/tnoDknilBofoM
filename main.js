@@ -1,8 +1,5 @@
-const init = async () => {
-  if (save.load()) console.log('Save loaded');
-  PGE.run();
-  gameLoop();
-};
+import { glyphs } from './modules/glyphs.js';
+import { ecs } from './modules/ecs.js';
 
-// Game loop + auto-save
-setInterval(save.serialize, 300000); // 5min autosave
+const playerAttack = glyphs.process('b0(o1)');  // Battle sub + LDA #$01
+ecs.create('player', { attack: playerAttack.value });
