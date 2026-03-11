@@ -43,3 +43,35 @@ body {
     color: white; font-weight: bold;
   }
 }
+// Cyberpunk 16-bit glow
+$neon-green: #00ff41;
+$matrix-black: #0a0a0a;
+$scanline: rgba(0,255,65,0.03);
+
+body {
+  background: radial-gradient(circle, $matrix-black 0%, #000 100%);
+  
+  canvas {
+    filter: drop-shadow(0 0 10px $neon-green);
+    image-rendering: pixelated;
+  }
+  
+  #ui {
+    position: absolute;
+    top: 10px; left: 10px;
+    font-size: 12px;
+    text-shadow: 0 0 5px $neon-green;
+    
+    div { margin: 5px 0; }
+  }
+}
+
+// Scanlines
+body::before {
+  content: '';
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: repeating-linear-gradient(
+    0deg, transparent, transparent 2px, $scanline 2px, $scanline 4px
+  );
+  pointer-events: none;
+}
