@@ -1,7 +1,25 @@
-import { Orchestrator } from '../java/Orchestrator.js'; // JNI/WASM
-import { ecs } from './modules/ecs.js';
+import { Orchestrator } from '../java/Orchestrator.js';
 
-async function init() {
-  const glyphGeo = await Orchestrator.processGlyph('0oo0O00O');
-  ecs.loadGeometry(glyphGeo);  // Rust verts → ECS world
-}
+const Game = (() => {
+  // Nested glyph physics
+  const decodeGlyph = (strand) => Orchestrator.processGlyph(strand);
+  
+  // ECS master list
+  const entities = new Map();
+  
+  const init = () => {
+    const geo = decodeGlyph('0oo0O00O');  // Rust→C#→Ruby→ASM
+    map.load(geo);
+    combat.init();
+  };
+  
+  // Module list dispatcher
+  const modules = {
+    ecs, eventbus, stats, inventory, combat, 
+    movement, loot, uiflash, lootsystem, map, enemy
+  };
+  
+  return { init, modules, entities };
+})();
+
+Game.init();
