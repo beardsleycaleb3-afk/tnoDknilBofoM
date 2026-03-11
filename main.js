@@ -1,25 +1,25 @@
-import { Orchestrator } from '../java/Orchestrator.js';
+import { PGE } from './engine.js';
+import { ecs } from './modules/ecs.js';
+import { combat } from './modules/combat.js';
 
 const Game = (() => {
-  // Nested glyph physics
-  const decodeGlyph = (strand) => Orchestrator.processGlyph(strand);
+  const canvas = document.getElementById('game');
+  const ctx = canvas.getContext('2d');
+  canvas.width = 320; canvas.height = 240;
   
-  // ECS master list
-  const entities = new Map();
-  
-  const init = () => {
-    const geo = decodeGlyph('0oo0O00O');  // Rust→C#→Ruby→ASM
-    map.load(geo);
-    combat.init();
+  const init = async () => {
+    PGE.run();  // Glyph physics → ECS
+    gameLoop();
   };
   
-  // Module list dispatcher
-  const modules = {
-    ecs, eventbus, stats, inventory, combat, 
-    movement, loot, uiflash, lootsystem, map, enemy
+  const gameLoop = () => {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ecs.update();
+    combat.render(ctx);
+    requestAnimationFrame(gameLoop);
   };
   
-  return { init, modules, entities };
+  return { init };
 })();
 
 Game.init();
