@@ -1,7 +1,8 @@
-const gameLoop = () => {
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  render.renderWorld();  // Glyph worlds
-  ecs.update();
-  combat.render(ctx);
-  requestAnimationFrame(gameLoop);
+const init = async () => {
+  if (save.load()) console.log('Save loaded');
+  PGE.run();
+  gameLoop();
 };
+
+// Game loop + auto-save
+setInterval(save.serialize, 300000); // 5min autosave
