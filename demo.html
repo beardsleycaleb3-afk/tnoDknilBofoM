@@ -1,0 +1,13 @@
+<!DOCTYPE html><canvas id=c></canvas><script>
+h="a61054895a1bf357a98b58663765592cb019012de136a6cd0af3fd67bad1bd42"
+p=h.match(/.{2}/g).map(x=>parseInt(x,16))
+c=c.getContext`2d`;s=500
+function r(){ // render loop
+  c.fillRect(0,0,s,s,'black')
+  c.save();c.translate(s/2,s/2);c.scale(p[0]/255,1)
+  c.beginPath();c.moveTo(0,-100);c.lineTo(-80,80);c.lineTo(80,80);c.closePath()
+  c.strokeStyle=`hsl(${p[1]%360},99%,50%)`;c.stroke()
+  for(i=2;i<32;i++)c.fillRect(p[i]%100-50,p[i+1]%100-50,4,4,`hsl(${p[i]%360},99%,50%)`)
+  c.restore();requestAnimationFrame(r)}
+r()
+</script>
