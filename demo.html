@@ -1,5 +1,4 @@
-<!DOCTYPE html><canvas id=c></canvas>
-<canvas id=c width=400 height=600 style="background:black"></canvas>
+<!DOCTYPE html><canvas id=c width=400 height=600 style="background:black"></canvas>
 <script>
 h="a61054895a1bf357a98b58663765592cb019012de136a6cd0af3fd67bad1bd42"
 p=h.match(/.{2}/g).map(x=>parseInt(x,16)/255)
@@ -24,3 +23,4 @@ function frame(){
   ctx.restore();requestAnimationFrame(frame)}
 frame()
   
+  }
